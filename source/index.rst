@@ -6,10 +6,6 @@
 Linux server mitigations
 ====================================================
 
-All `Mitigations`_.
-
-.. _Mitigations: https://tymyrddin.github.io/mitigations/
-
 .. toctree::
    :glob:
    :maxdepth: 1
@@ -99,3 +95,8 @@ All `Mitigations`_.
 
    docs/habits/README.md
    docs/habits/*
+
+.. toctree::
+   :caption: All mitigations
+
+   Overview <https://tymyrddin.github.io/mitigations/>
