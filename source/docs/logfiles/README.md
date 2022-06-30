@@ -16,5 +16,5 @@
 * Normally I am all for distributed and decentralised systems, but for an infrastructure with multiple servers, centralised logging saves a lot of time and energy.
 * When setting up a machine to act as log server, harden it and only use it to collect logs from other machines on your network. It should not be running anything else than that.
 * Log what is needed to track the path of a common intruder.
-* If it is all running well, consider setting up for intrusion detection and [log correlation](https://tymyrddin.wiki/forensics/logs).
+* If it is all running well, consider setting up for intrusion detection and log correlation.
 
