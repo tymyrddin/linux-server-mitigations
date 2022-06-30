@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problems &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TLS/SSL" href="TLS-SSL.html" />
+    <link rel="prev" title="Pluggable Authentication Modules (PAM)" href="PAM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Problems</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/pki/Problems.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="problems">
+<h1>Problems<a class="headerlink" href="#problems" title="Permalink to this heading"></a></h1>
+<p>PKI is failing by trying to be all things to all people and things. PKIs have experienced a hype and many companies and organizations announced to provide certification services to the general public. Only a few of these have succeeded and actually provide certification services that can be taken seriously.</p>
+<section id="x-509-standard">
+<h2>X.509 standard<a class="headerlink" href="#x-509-standard" title="Permalink to this heading"></a></h2>
+<p>X.509 is a complex standard and X.509 certificates are complex data structures with a lot of fields, many of which are critical and/or non-critical extension fields. Complex technology is not easy to deploy on a large-scale. Since Peter Gutmann from Auckland University published the X.509 Style Guide in 2000, little has improved.</p>
+<ul class="simple">
+<li><p>X.509 certificates are specified with ASN.1 and the resulting data structures are not very meaningful for humans (and hard to parse).</p></li>
+<li><p>The X.509 specification is scattered across many standards, drafts and amendments from multiple standard bodies, leading to confusion and numerous profiles that lack interoperability.</p></li>
+<li><p>Parts of the standard, even some that are related to key elements, are underspecified. That leads to ambiguity, unknown semantics and interoperability issues, like the country code, date/time formats in validity or path validation.</p></li>
+</ul>
+</section>
+<section id="technical">
+<h2>Technical<a class="headerlink" href="#technical" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Public key pairs must be generated in an efficient and secure (centralized or decentralized) way, and require a cryptographically strong pseudo-random bit generator, something which is not always available to end-users.</p></li>
+<li><p>Private keys must be securely stored in a personal security environment (and not a vulnerable endpoint), and for <a class="reference internal" href="TLS-SSL.html"><span class="doc std std-doc">Web PKI</span></a> public CA’s certificates must be made publicly available in a certificate repository or directory service. Hierarchical trust models are dangerous, because  they provide a single point of attack. Alternative models (for example the mesh model) are poorly scalable in time and in space.</p></li>
+<li><p>Certificate authorities (CA’s) have to periodically send out a list of certificates that have been revoked (CRL’s), meaning that a user will not only have to get the corresponding certificates from the certification chain, but will also have to check that those certificates are not in the CRL.</p></li>
+<li><p>The definition and maintenance of a global name space is not as simple in practice.</p></li>
+<li><p>Cross-certification does not work in practice because competition is rule.</p></li>
+</ul>
+</section>
+<section id="economical">
+<h2>Economical<a class="headerlink" href="#economical" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The establishment and operation of a top CA requires large investments. One needs protection from adversaries trying to break into the facility, intercepting electromagnetic signals, and exploitation of other weaknesses of the used hardware and software, and one needs qualified personnel able to withstand all of the regulation and bureaucratic stuff.</p></li>
+<li><p>The ROI of a top CA is difficult to determine and quantify. Like many other infrastructure components, public key certificates do not provide a specific function in and of themselves, but provides only the means to secure functions and applications of other infrastructures. IOW, business cases for PKI’s are extremely hard to make. That part got solved, with some scary stuff happening, web PKI next in the chain, and hosting companies (re)selling certificates.</p></li>
+</ul>
+</section>
+<section id="juridical">
+<h2>Juridical<a class="headerlink" href="#juridical" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>If a digital signature is generated according to some digital signature law, then somebody must be made liable if something goes wrong. If that is the Credential service provider (CSP), the insurance protection must be taken into account in a business case.</p></li>
+<li><p>As Bruce Schneier pointed out in <a class="reference external" href="https://www.schneier.com/books/secrets_and_lies/">Secrets and Lies</a>, CA’s usually limit their liability to the protection of their private key. As the CA plays the role of a trusted third party users of certificates are put at a disadvantage. CA’s are like a notary who would only be liable to keep his stamp secure. Nothing changed much there either.</p></li>
+<li><p>The owner of a public key certificate cannot repudiate a signature that is generated with the appropriate signing key, which may lead to the situation in which a certificate owner may be held liable and accountable for statements that are digitally signed with the proper key, even if he or she does not know (and does not agree) with the statements.</p></li>
+</ul>
+</section>
+<section id="social">
+<h2>Social<a class="headerlink" href="#social" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>In the real world, trust is based on two-way relationships and experiences that have been made over time. This can only  insufficiently be modelled with hierarchical certificate models.</p></li>
+<li><p>Poor usability is a common feature of many products that employ (public key) cryptography. Secure cryptographic solutions and usability seem mutually exclusive. But then, there is not much focus on end users and UX design in general. What’s new?</p></li>
+<li><p>The users of public key cryptography are often not aware of the vulnerabilities and pitfalls.</p></li>
+</ul>
+</section>
+<section id="privacy-and-security">
+<h2>Privacy and security<a class="headerlink" href="#privacy-and-security" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>X.509 uses features from other standards, like DNs from X.500 which are in itself complex and have little value and provides unanticipated attack vectors.</p></li>
+<li><p>SSL in the context of web browsers used to be target of several successful attacks, either directly on SSL (e.g. SSL renegotiation bug), the combination of https and http (SSL Strip), URL-forgery, and X.509-based attacks on ASN.1 and DN-parsing.</p></li>
+<li><p>Integration of PKI with the surrounding environment (end points, web applications) may allow compromise.</p></li>
+<li><p>Should a private key be compromised, an attacker would have access to data intended for the recipient. Attackers that gain access to private keys can also eavesdrop on content intended for a recipient and decrypt data as it’s collected. This is the biggest threat to the PKI system, because compromised keys require new keys to be issued, and old ones revoked.</p></li>
+<li><p>There is no easy, fast and effective method to revoke a root certificate. Anything less that a full compromise of the root key will tempt a CA to downplay the incident and revoke only certain certificates. This occurred with the DigiNotar-Hack, because the revocation of the root-CA would have interrupted the operation of many services.</p></li>
+<li><p>Revocation services are suspect to DoS-attacks.</p></li>
+<li><p>CAs are included in browsers by OS- and browser vendors without a common consistent policy. To be included in the trust store the vendor has to pay a fee. Only Microsoft requires a formal audit. As a result there is a sufficient number of weak and very weak CAs that are included in default certificate stores. In addition there is suspicion in the security community that governments use compelled certificates to tap Internet communication.</p></li>
+<li><p>Clients certificates and their attributes have zero security value, because there are CAs that do not validate the attributes including attributes with arbitrary OIDs (P. Gutmann).</p></li>
+<li><p>Some certificate stores contain funny root certificates that should be excluded on any serious security review.</p></li>
+</ul>
+</section>
+<section id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this heading"></a></h2>
+<p>A variety of alternative approaches, ranging from simple workarounds to designing the application to sidestep PKI’s shortcomings, can help solve the problems inherent in the standard X.509 model. For example, in simple public key infrastructure (SPKI) and simple distributed security infrastructure (SDSI), keys are not bound to identities, but to roles or authorisations and names only have to be unique locally.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hal.inria.fr/hal-01463660/document">PKI interoperability: Still an issue? A solution in the X.509 realm</a>, Ahmad Samer Wazan Romain Laborde, François Barrere, Abdelmalek Benzekri, David W Chadwick, 2017</p></li>
+<li><p><a class="reference external" href="https://pdfs.semanticscholar.org/1879/2962f8150e074ba5373cf1535a87a51e37fd.pdf">Why have public key infrastructures failed so far?</a>, Javier Lopez, Rolf Oppliger, Gunther Pernu, 2005</p></li>
+<li><p><a class="reference external" href="https://www.cs.auckland.ac.nz/~pgut001/pubs/notdead.pdf">PKI: It’s Not Dead, Just Resting</a>, Peter Gutmann, 2002</p></li>
+<li><p><a class="reference external" href="https://digitalcommons.law.uw.edu/faculty-articles/167/">The Emperor’s New Clothes:  The Shocking Truth About Digital Signatures and Internet Commerce</a>, Jane K. Winn, 2001</p></li>
+<li><p><a class="reference external" href="https://www.cs.auckland.ac.nz/~pgut001/pubs/x509guide.txt">X.509 Style Guide, Peter Gutmann</a>, 2000</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PAM.html" class="btn btn-neutral float-left" title="Pluggable Authentication Modules (PAM)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TLS-SSL.html" class="btn btn-neutral float-right" title="TLS/SSL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

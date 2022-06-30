@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TigerVNC &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TightVNC" href="TightVNC.html" />
+    <link rel="prev" title="Securing sessions" href="Securing-sessions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pki/README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>TigerVNC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/vnc/TigerVNC.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tigervnc">
+<h1>TigerVNC<a class="headerlink" href="#tigervnc" title="Permalink to this heading"></a></h1>
+<p>TigerVNC is not as lightweight as <a class="reference internal" href="TightVNC.html"><span class="doc std std-doc">TightVNC</span></a>, but it provides extensions for advanced authentication methods and <a class="reference internal" href="Securing-sessions.html"><span class="doc std std-doc">TLS encryption</span></a>, hence a proper candidate for a fallback when ssh fails.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>Install the <a class="reference external" href="https://www.xfce.org">Xfce desktop environment</a> on the server:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># apt-get install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils
+</pre></div>
+</div>
+<p>Install the vnc server:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># apt-get install tigervnc-standalone-server tigervnc-common
+</pre></div>
+</div>
+<p>Create a new user to access the server.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># useradd vncuser
+</pre></div>
+</div>
+<p>Add the user to the sudo group:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># usermod -aG sudo vncuser
+</pre></div>
+</div>
+<p>As the vncuser, run the vncserver command to create the initial configuration and set up the password. Do not use sudo.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vncserver
+You will require a password to access your desktops.
+
+Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+/usr/bin/xauth:  file /home/vncuser/.Xauthority does not exist
+
+New &#39;debian9.localdomain:1 (vncuser)&#39; desktop at :1 on machine debian9.localdomain
+
+Starting applications specified in /etc/X11/Xvnc-session
+Log file is /home/vncuser/.vnc/debian9.localdomain:1.log
+
+Use xtigervncviewer -SecurityTypes VncAuth -passwd /home/vncuser/.vnc/passwd :1 to connect to the VNC server.
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Default for the service is on port 5901 (display port <code class="docutils literal notranslate"><span class="pre">:1</span></code>). Stop the service:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vncserver -kill :1
+</pre></div>
+</div>
+<p>Make a backup of the <code class="docutils literal notranslate"><span class="pre">xstartup</span></code> file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mv ~/.vnc/xstartup ~/.vnc/xstartup.old
+</pre></div>
+</div>
+<p>Create a new <code class="docutils literal notranslate"><span class="pre">xstartup</span></code> file and open it (empty file):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vi ~/.vnc/xstartup
+</pre></div>
+</div>
+<p>To have VNC read the server user’s .Xresources file and launch Xfce (in the background), append:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+exec startxfce4 
+</pre></div>
+</div>
+<p>Write and quit file, and (as root) make it executable.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># chmod u+x ~/.vnc/xstartup
+</pre></div>
+</div>
+<p>Restart the service:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vncserver
+</pre></div>
+</div>
+</section>
+<section id="firewall">
+<h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this heading"></a></h2>
+<p>Open ports in the firewall for inbound communication.</p>
+</section>
+<section id="control">
+<h2>Control<a class="headerlink" href="#control" title="Permalink to this heading"></a></h2>
+<p>For starting, stopping, and restarting the service, create a new (empty) systemd unit file <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/vncserver&#64;.service</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># vi /etc/systemd/system/vncserver@.service
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol will allow for passing an argument (the VNC display port). Append:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=Remote desktop service (VNC)
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=vncuser
+PAMName=login
+PIDFile=/home/%u/.vnc/%H%i.pid
+ExecStartPre=/bin/sh -c &#39;/usr/bin/vncserver -kill :%i &gt; /dev/null 2&gt;&amp;1 || :&#39;
+ExecStart=/usr/bin/vncserver :%i -geometry 1280x800 -alwaysshared -fg
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.targetReload systemd manager configuration
+
+# systemctl daemon-reload
+</pre></div>
+</div>
+<p>Enable the unit file</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># systemctl enable vncserver@1.service
+</pre></div>
+</div>
+<p>Kill the vncserver</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vncserver -kill :1
+</pre></div>
+</div>
+<p>And start it as any other systemd service.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl start vncserver@1
+</pre></div>
+</div>
+<p>Verify
+$ sudo systemctl status vncserver&#64;1</p>
+</section>
+<section id="clients">
+<h2>Clients<a class="headerlink" href="#clients" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Linux: xvnc4viewer</p></li>
+</ul>
+</section>
+<section id="configuration-resources">
+<h2>Configuration resources<a class="headerlink" href="#configuration-resources" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tigervnc.org/">TigerVNC</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Securing-sessions.html" class="btn btn-neutral float-left" title="Securing sessions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TightVNC.html" class="btn btn-neutral float-right" title="TightVNC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

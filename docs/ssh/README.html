@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSH &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Authentication error" href="Authentication-error.html" />
+    <link rel="prev" title="Services audit" href="../separation/Services-audit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pki/README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SSH</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/ssh/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ssh">
+<h1>SSH<a class="headerlink" href="#ssh" title="Permalink to this heading"></a></h1>
+<p>SSH (Secure Shell) is used for managing networks, operating systems, and configurations. It is also used inside many file transfer tools and configuration management tools. Functionally SSH keys resemble passwords. SSH keys are a pair of cryptographic keys using a public key cryptosystem that can be used to authenticate to an SSH server as an alternative to password-based logins. A private and public key pair are created prior to authentication. The private key is kept secret and secure by the user, while the public key can be shared with anyone.</p>
+<p>The advantage SSH authentication has over traditional password authentication is that you can be authenticated by the server without having to send your password over the network. Anyone eavesdropping on unencrypted connections will not be able to intercept and crack the password. It also allows for disabling password-based authentication.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Installing-SSH.html"><span class="doc std std-doc">Installing SSH</span></a></p></li>
+<li><p><a class="reference internal" href="Harden-ssh-server.html"><span class="doc std std-doc">Harden ssh server</span></a></p></li>
+<li><p><a class="reference internal" href="Key-management.html"><span class="doc std std-doc">Key management</span></a></p></li>
+<li><p><a class="reference internal" href="Jumping-hosts.html"><span class="doc std std-doc">Jumping hosts</span></a></p></li>
+<li><p><a class="reference internal" href="ForwardAgent.html"><span class="doc std std-doc">ForwardAgent</span></a></p></li>
+<li><p><a class="reference internal" href="ProxyCommand.html"><span class="doc std std-doc">ProxyCommand</span></a></p></li>
+<li><p><a class="reference internal" href="ProxyJump.html"><span class="doc std std-doc">ProxyJump</span></a></p></li>
+<li><p><a class="reference internal" href="Authentication-error.html"><span class="doc std std-doc">Authentication error</span></a></p></li>
+<li><p><a class="reference internal" href="Keeping-current.html"><span class="doc std std-doc">Keeping current</span></a></p></li>
+</ul>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install and configure ssh keys and make your servers require them to minimise the risk posed by adversaries.</p></li>
+<li><p>Harden the ssh server (also harden default service settings in web server and other services)</p></li>
+<li><p>Do not leave passphrase empty - An adversary who gets hold of your private key can otherwise connect to the hosts where you put you public key.</p></li>
+<li><p>Use a separate key per client you ssh from to the same server. If one key is compromised the damage is more limited and easier to clean up.</p></li>
+<li><p>Limit the number of clients you ssh from. If a client is compromised an adversary has your key, they can install a binary to get your passwords/passphrases.</p></li>
+<li><p>If any, disable the ssh-server on the client machine you ssh from. Limit the attack surface.</p></li>
+<li><p>Don’t make jump host chains too long. If one client in the chain is compromised, an adversary can use that to compromise the rest of the clients down the chain.</p></li>
+<li><p>Don’t use Agent Forwarding. While being connected to the first host, anyone with sufficient permission on the first host will be able to use that socket to connect to and use that local ssh-agent. A rogue root or evil admin with root access can eavesdrop on the ongoing session and impersonate the user for authentication to other servers during the time that user is connected to that server. Instead, use ProxyJump (it uses E2EE) or, if that is not possible, use ProxyCommand.</p></li>
+<li><p>In some countries, proving that you connected to a particular server is enough to be prosecuted, but SSH doesn’t provide a native way to obfuscate to whom it connects. For that, SSH with Tor ([[en:security:computer:server:tor:proxy|Tor proxy]]) can be used.</p></li>
+<li><p>Don’t ignore authentication errors. This warning is protecting you. The remote host key is different than the client knows. Make sure the key really did change. An adversary may be spoofing the host and continuing may give the adversary the information they seek to attack your server. Another reason to not use passwords.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../separation/Services-audit.html" class="btn btn-neutral float-left" title="Services audit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Authentication-error.html" class="btn btn-neutral float-right" title="Authentication error" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

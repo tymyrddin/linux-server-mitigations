@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chroot jails &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Communication" href="Communication.html" />
+    <link rel="prev" title="Separation and isolation" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Separation and isolation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pki/README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Chroot jails</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/separation/Chroot-jails.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="chroot-jails">
+<h1>Chroot jails<a class="headerlink" href="#chroot-jails" title="Permalink to this heading"></a></h1>
+<p>Setting up a <code class="docutils literal notranslate"><span class="pre">chroot</span></code> environment for each component provides some level of isolation, but there are many easy ways of breaking out of a <code class="docutils literal notranslate"><span class="pre">chroot</span></code> environment. Moving components to dedicated machines is better, often easier, and more costly as it requires more (virtual) machines, and securing and maintaining each and every server.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">chroot</span></code> is an operation that changes the apparent root directory for the current running process and their children. It temporarily changes the root directory (which is normally /) to the chroot directory (for example, /var/chroot). As the root directory is the top of the filesystem hierarchy, applications are unable to access directories higher up than the root directory, hence are isolated from the rest of the system. This prevents applications inside the chroot from accessing files and commands elsewhere on the server. This modified environment is called a //chroot jail//.</p>
+<p>Changing root is done for performing system maintenance on systems where booting and/or logging in is no longer possible, such as reinstalling a bootloader, rebuilding an initramfs image, upgrading or downgrading packages, resetting a forgotten password, building packages in a clean chroot, etc.</p>
+<section id="create-jail">
+<h2>Create jail<a class="headerlink" href="#create-jail" title="Permalink to this heading"></a></h2>
+<p>To create a chroot jail:
+# chroot /path/to/new/root command
+or
+# chroot /path/to/new/root /path/to/server
+or
+# chroot [options] /path/to/new/root /path/to/server</p>
+<p>For a chrooted program to successfully start, the chroot directory must be populated with a minimum set of scratch space, configuration files, device nodes and shared libraries. This can make chroot difficult to use as a general sandboxing mechanism.</p>
+</section>
+<section id="simple-jail-with-bash-and-ls">
+<h2>Simple jail with bash and ls<a class="headerlink" href="#simple-jail-with-bash-and-ls" title="Permalink to this heading"></a></h2>
+<p>Building a “virtual root” containing every file the commands may need.</p>
+<p>Create a directory which will become the root of the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir jail
+$ cd jail
+</pre></div>
+</div>
+<p>Create the necessary directories</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir -p bin lib64/x86_64-linux-gnu lib/x86_64-linux-gnu
+</pre></div>
+</div>
+<p>Copy location of <code class="docutils literal notranslate"><span class="pre">ls</span></code> and <code class="docutils literal notranslate"><span class="pre">bash</span></code> with <code class="docutils literal notranslate"><span class="pre">which</span></code> (unalias both first if having aliased them)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp $(which ls) ./bin/
+$ cp $(which bash) ./bin/
+</pre></div>
+</div>
+<p>Find dependencies of <code class="docutils literal notranslate"><span class="pre">bash</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ldd $(which bash)
+linux-vdso.so.1 (0x00007ffc1f71a000)
+libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007f46ec9a6000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f46ec7a2000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f46ec403000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f46ecbd0000)
+</pre></div>
+</div>
+<p>Create directories</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp /lib/x86_64-linux-gnu/libtinfo.so.5 lib/x86_64-linux-gnu/
+$ cp /lib/x86_64-linux-gnu/libdl.so.2 lib/x86_64-linux-gnu/
+$ cp /lib/x86_64-linux-gnu/libc.so.6 lib/x86_64-linux-gnu/
+$ cp /lib64/ld-linux-x86-64.so.2 lib64/
+</pre></div>
+</div>
+<p>Find dependencies of <code class="docutils literal notranslate"><span class="pre">ls</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ldd $(which ls)
+linux-vdso.so.1 (0x00007ffdf15bf000)
+libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007fcd43e2a000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fcd43a8b000)
+libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007fcd43818000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fcd43614000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fcd44273000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fcd433f7000)
+</pre></div>
+</div>
+<p>Create directories</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp /lib/x86_64-linux-gnu/libselinux.so.1 lib/x86_64-linux-gnu/
+$ cp /lib/x86_64-linux-gnu/libc.so.6 lib/x86_64-linux-gnu/
+$ cp /lib/x86_64-linux-gnu/libpcre.so.3 lib/x86_64-linux-gnu/
+$ cp /lib/x86_64-linux-gnu/libdl.so.2 lib/x86_64-linux-gnu/
+$ cp /lib64/ld-linux-x86-64.so.2  lib64/
+$ cp /lib/x86_64-linux-gnu/libpthread.so.0 lib/x86_64-linux-gnu/ 
+</pre></div>
+</div>
+<p>Go up, change the root and path to the shell</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  cd ..
+$ sudo chroot jail /bin/bash
+[sudo] password for nina: 
+bash-4.4#
+</pre></div>
+</div>
+<p>Exit the jail with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span><span class="o">-</span><span class="mf">4.4</span><span class="c1"># exit</span>
+</pre></div>
+</div>
+<p>Processes in the jailed shell run as a simple child processes and are a user level process in the host OS and isolated by the namespaces provided by the kernel =&gt; isolation and minimal overhead. While the jail is running, check in another terminal with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ps aux | grep &quot;chroot&quot;
+avahi      852  0.0  0.0  47012    32 ?        S    Jul31   0:00 avahi-daemon: chroot helper
+root     27884  0.0  0.0  55476  3680 pts/0    S    15:04   0:00 sudo chroot jail /bin/bash
+</pre></div>
+</div>
+</section>
+<section id="chrooting-webservers">
+<h2>Chrooting webservers<a class="headerlink" href="#chrooting-webservers" title="Permalink to this heading"></a></h2>
+<p>The above example just demonstrates the basic principles. More (complex) commands can be added to a jail that may require the creation of more directories such as <code class="docutils literal notranslate"><span class="pre">/proc</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev</span></code>.</p>
+<p>Chroot jails are commonly used for Apache and Nginx web servers.</p>
+<section id="upgrading">
+<h3>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this heading"></a></h3>
+<p>Upgrade the chrooted web server, as well as php and related extensions:</p>
+<ul class="simple">
+<li><p>Stop or shutdown web server</p></li>
+<li><p>Backup existing chrooted directory to another partition or directory</p></li>
+<li><p>Download latest web server. Upgrade web server.</p></li>
+<li><p>Upgrade php and php-mysql extensions</p></li>
+<li><p>Upgrade chrooted web server located at <code class="docutils literal notranslate"><span class="pre">/chroot</span></code> or <code class="docutils literal notranslate"><span class="pre">/jail</span></code> or <code class="docutils literal notranslate"><span class="pre">/whatever-its-called</span></code></p></li>
+<li><p>Copy the mysql extension and copy all the php shared modules such as php-imap, php-gd, php-memcache etc.</p></li>
+<li><p>Start the web server</p></li>
+<li><p>Check all is running as intended</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># tail -f /var/log/message</span>
+<span class="c1"># netstat -tulpn</span>
+</pre></div>
+</div>
+</section>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Some systemd tools such as <code class="docutils literal notranslate"><span class="pre">hostnamectl</span></code>, <code class="docutils literal notranslate"><span class="pre">localectl</span></code> and <code class="docutils literal notranslate"><span class="pre">timedatectl</span></code> can not be used inside a <code class="docutils literal notranslate"><span class="pre">chroot</span></code>, as they require an active //dbus// connection.</p></li>
+<li><p>The file system that will serve as the new root (/) of a chroot must be accessible (decrypted and mounted).  When using <code class="docutils literal notranslate"><span class="pre">--rbind</span></code>, some subdirectories of <code class="docutils literal notranslate"><span class="pre">dev/</span></code> and <code class="docutils literal notranslate"><span class="pre">sys/</span></code> will not be unmountable. Attempting to unmount with <code class="docutils literal notranslate"><span class="pre">umount</span> <span class="pre">-l</span></code> in this situation will break the session and requires a reboot. If possible, use <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">bind</span></code> instead.</p></li>
+</ul>
+</section>
+</section>
+<section id="security">
+<h2>Security?<a class="headerlink" href="#security" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">chroot</span></code> mechanism is <strong>NOT</strong> intended to defend against intentional tampering by privileged (root) users. On most systems, //chroot contexts// do not stack properly and chrooted programs with sufficient privileges may perform a second <code class="docutils literal notranslate"><span class="pre">chroot</span></code> to break out. To mitigate the risk of this security weakness, chrooted programs should relinquish root privileges as soon as practical after chrooting. Or use FreeBSD jails instead. FreeBSD takes precautions to prevent the second chroot attack.</p>
+<p>On systems that support device nodes on ordinary filesystems with special files, a chrooted root user can still create device nodes and mount the file systems on them. The chroot mechanism is <strong>NOT</strong> intended by itself to be used to block low-level access to system devices by privileged users. It is <strong>NOT</strong> intended to restrict the use of resources like I/O, bandwidth, disk space or CPU time. When a system is <strong>NOT</strong> completely file system-oriented, it leaves potentially disruptive functionality like networking and process control available through the system call interface to a chrooted program.</p>
+</section>
+<section id="without-root">
+<h2>Without root<a class="headerlink" href="#without-root" title="Permalink to this heading"></a></h2>
+<section id="fakeroot">
+<h3>fakeroot<a class="headerlink" href="#fakeroot" title="Permalink to this heading"></a></h3>
+<p>In principle, only the root user can perform a chroot, to prevent users from putting a <code class="docutils literal notranslate"><span class="pre">setuid</span></code> program inside a chroot jail (for example, with a fake <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> file) that would fool it into a privilege escalation.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fakechroot</span></code> is a library shim which intercepts the <code class="docutils literal notranslate"><span class="pre">chroot</span></code> call and fakes the results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> runs a command in an environment where it appears to have root privileges for file manipulation.</p></li>
+</ul>
+<p>They can be used in conjunction to simulate a chroot as a regular user. This is useful for allowing users to create archives (tar, ar, .deb etc.) with files in them with root permissions/ownership. Without <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> one would have to have root privileges to create the constituent files of the archives with the correct permissions and ownership, and then pack them up, or one would have to construct the archives directly, without using the archiver.</p>
+</section>
+<section id="schroot">
+<h3>schroot<a class="headerlink" href="#schroot" title="Permalink to this heading"></a></h3>
+<p>Or use the <code class="docutils literal notranslate"><span class="pre">schroot</span></code> wrapper which allows unprivileged users to have access to one or more <code class="docutils literal notranslate"><span class="pre">chroot</span></code> environments. <code class="docutils literal notranslate"><span class="pre">schroot</span></code> handles the <code class="docutils literal notranslate"><span class="pre">chroot</span></code> call as well as dropping privileges inside the jail, setting up <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> and bind mounting resources into the jail (like <code class="docutils literal notranslate"><span class="pre">home</span></code> directories, <code class="docutils literal notranslate"><span class="pre">/dev</span></code>, <code class="docutils literal notranslate"><span class="pre">/sys</span></code>, and <code class="docutils literal notranslate"><span class="pre">/proc</span></code>)</p>
+</section>
+<section id="proot">
+<h3>proot<a class="headerlink" href="#proot" title="Permalink to this heading"></a></h3>
+<p>PRoot may be used to change the apparent root directory and use <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">--bind</span></code> without root privileges. This is useful for confining applications to a single directory or running programs built for a different CPU architecture, but it has limitations due to the fact that all files are owned by the user on the host system. PRoot provides a <code class="docutils literal notranslate"><span class="pre">--root-id</span></code> argument that can be used as a workaround for some of these limitations in a similar (albeit more limited) manner to fakeroot.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="Separation and isolation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Communication.html" class="btn btn-neutral float-right" title="Communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

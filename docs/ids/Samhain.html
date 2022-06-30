@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samhain &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Snort" href="Snort.html" />
+    <link rel="prev" title="Maltrail" href="Maltrail.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pki/README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Samhain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/ids/Samhain.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samhain">
+<h1>Samhain<a class="headerlink" href="#samhain" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference external" href="https://www.la-samhna.de/samhain/index.html">Samhain</a> host-based intrusion detection system (HIDS) provides file integrity checking, log file monitoring/analysis, rootkit detection, port monitoring, detection of rogue SUID executables, and hidden processes. Like having tripwire when it was still working plus rkhunter rolled into one.</p>
+<p>Plus, it can be expanded to include more (remote) clients if set up in client-server mode and getting <a class="reference external" href="https://www.la-samhna.de/beltane/index.html">Beltane II</a> as well (not GPL licensed and can be used on a limited amount of (10) machines for a small donation). Something that can maybe be used for guarding client machines remotely. Yum.</p>
+<section id="problems">
+<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>A steeper learning curve than for other programs.</p></li>
+<li><p>No binaries available, setting it up is not easy for non-techies</p></li>
+</ul>
+</section>
+<section id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this heading"></a></h2>
+<p>Download samhain-current.tar.gz from <a class="reference external" href="https://www.la-samhna.de">Samhain Labs</a>.</p>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Permalink to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd Downloads/
+$ gunzip samhain-current.tar.gz
+$ tar -xf samhain-current.tar
+$ gpg --keyserver pgp.mit.edu --recv-key 0F571F6C
+gpg: key 1AAD26C80F571F6C: 3 duplicate signatures removed
+gpg: key 1AAD26C80F571F6C: 96 signatures not checked due to missing keys
+gpg: key 1AAD26C80F571F6C: &quot;Rainer Wichmann &lt;rwichmann@la-samhna.de&gt;&quot; not changed
+gpg: key 3A2AAE330F571F6C: 21 signatures not checked due to missing keys
+gpg: key 3A2AAE330F571F6C: &quot;Rainer Wichmann &lt;rwichmann@la-samhna.de&gt;&quot; not changed
+gpg: Total number processed: 2
+gpg:              unchanged: 2
+$ gpg --fingerprint 0F571F6C
+pub   dsa1024 1999-10-31 [SCA]
+      EF6C EF54 701A 0AFD B86A  F4C3 1AAD 26C8 0F57 1F6C
+uid           [ unknown] Rainer Wichmann &lt;rwichmann@la-samhna.de&gt;
+uid           [ unknown] Rainer Wichmann &lt;rwichmann@hs.uni-hamburg.de&gt;
+sub   elg1024 1999-10-31 [E]
+
+pub   rsa1024 2014-07-21 [SCEA] [revoked: 2016-08-16]
+      5B17 5A1C 8C1B 7BC3 CB12  0FAA 3A2A AE33 0F57 1F6C
+uid           [ revoked] Rainer Wichmann &lt;rwichmann@la-samhna.de&gt;
+
+[nina@archlinux Downloads]$ gpg --verify samhain-4.2.4.tar.gz.asc samhain-4.2.4.tar.gz
+gpg: Signature made Thu 21 Dec 2017 09:05:24 PM CET
+gpg:                using DSA key 1AAD26C80F571F6C
+gpg: Good signature from &quot;Rainer Wichmann &lt;rwichmann@la-samhna.de&gt;&quot; [unknown]
+gpg:                 aka &quot;Rainer Wichmann &lt;rwichmann@hs.uni-hamburg.de&gt;&quot; [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: EF6C EF54 701A 0AFD B86A  F4C3 1AAD 26C8 0F57 1F6C
+</pre></div>
+</div>
+<p>And that fits with the key given on the site.</p>
+</section>
+<section id="simple-configuration-stand-alone">
+<h2>Simple configuration stand-alone<a class="headerlink" href="#simple-configuration-stand-alone" title="Permalink to this heading"></a></h2>
+<p>Configure <a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-configure.html">stand-alone version</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./configure
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether make sets $(MAKE)... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+.
+.
+.
+[snip]
+.
+.
+.
+config.status: creating deploy.sh
+config.status: creating config.h
+config.status: executing default commands
+
+ samhain has been configured as follows:
+     System binaries: /usr/local/sbin
+  Configuration file: /etc/samhainrc
+        Manual pages: /usr/local/man
+      Data directory: /var/lib/samhain
+       Database file: /var/lib/samhain/samhain_file
+            PID file: /run/samhain.pid
+            Log file: /var/log/samhain_log
+            Base key: 1617215581,281009996
+
+    Selected rc file: samhainrc.linux
+$
+</pre></div>
+</div>
+</section>
+<section id="configuration-for-watching-logins-mounts-and-rootkits">
+<h2>Configuration for watching logins, mounts and rootkits<a class="headerlink" href="#configuration-for-watching-logins-mounts-and-rootkits" title="Permalink to this heading"></a></h2>
+<p>Watching over logins:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./configure --enable-login-watch
+</pre></div>
+</div>
+<p>Over mountings:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./configure --enable-mount-check
+</pre></div>
+</div>
+<p>Samhain can check for kernel rootkits on FreeBSD and Linux with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./configure --with-kcheck=systemmap
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">systemmap</span></code> is the System.map file for a particular system.</p>
+</section>
+<section id="configuration-for-stealth">
+<h2>Configuration for stealth<a class="headerlink" href="#configuration-for-stealth" title="Permalink to this heading"></a></h2>
+<p>If an intruder cannot discover that samhain is running, he cannot compromise it. You can, for example, use:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./configure --enable-install-name=somename
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">somename</span></code> is an innocuous-sounding executable name. To make it less likely that the program isn’t accidentally discovered, samhain can be set to never respond to the command line. Or, it can be set to respond to the command line only after a certain password is given:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$./configure --enable-nocl=somepass
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">somepass</span></code> is set to an empty string it disables command-line interaction completely. Otherwise, invoke samhain with <code class="docutils literal notranslate"><span class="pre">somepass</span></code> as the first argument followed by the other arguments.</p>
+<p>There are many other interesting stealth options available, all documented along with the rest of the compilation switches in <a class="reference external" href="https://www.la-samhna.de/samhain/manual/compilation-options.html">Appendix A of the documentation</a>.</p>
+</section>
+<section id="build">
+<h2>Build<a class="headerlink" href="#build" title="Permalink to this heading"></a></h2>
+<p>Next step is to <a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-build.html">Build</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ make
+gcc -I. -o depend-gen ./src/depend-gen.c
+update depend.dep ...
+gcc -I. -o mkhdr ./src/mkhdr.c
+gcc -I. -o encode ./src/encode.c
+encode 0 config.h
+./encode 0 ./src/sh_files.c --&gt; x_sh_files.c
+gcc  -DHAVE_CONFIG_H -I. -I./include   -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-all -pthread -DUSE_MALLOC_LOCK=1 -fPIE -Wall -W  -fno-strength-reduce -fno-omit-frame-pointer -Wno-empty-body -Wno-invalid-source-encoding  -DSH_STANDALONE -o sh_files.o -c x_sh_files.c
+.
+.
+.
+[snip]
+.
+.
+.
+sh_string.o sh_inotify.o dnmalloc.o sh_audit.o sh_registry.o sh_ipvx.o sh_restrict.o sh_filetype.o sh_sub.o sh_fInotify.o sh_checksum.o sh_guid.o sh_sem.o sh_dbIO.o sh_dbCheck.o sh_dbCreate.o  -lz  -lresolv -lnsl  -lnsl -lattr -lacl
+gcc -I.  -o sstrip ./src/sstrip.c
+$
+</pre></div>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-install.html">Install</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ make install /usr/bin/install -c -m 700 samhain /usr/local/sbin/samhain
+/usr/bin/install: cannot create regular file &#39;/usr/local/sbin/samhain&#39;: Permission denied
+chmod: cannot access &#39;/usr/local/sbin/samhain&#39;: No such file or directory
+make: *** [Makefile:518: install-program] Error 1
+</pre></div>
+</div>
+<p>Ah yes, installing an application and using <code class="docutils literal notranslate"><span class="pre">./configure</span></code> without the –prefix= option, the make install process will install the compiled files in to the predefined paths in the system’s file system, and that means special permissions for writing the files is required:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo make install
+[sudo] password for nina: 
+ /usr/bin/install -c -m 700 samhain /usr/local/sbin/samhain
+/bin/sh ./mkinstalldirs /usr/local/man/man8
+mkdir /usr/local/man/man8
+/bin/sh ./mkinstalldirs /usr/local/man/man5
+mkdir /usr/local/man/man5
+  /usr/bin/install -c -m 644 ./man/samhain.8 /usr/local/man/man8/samhain.8
+  /usr/bin/install -c -m 644 ./man/samhainrc.5 /usr/local/man/man5/samhainrc.5
+gcc  -DHAVE_CONFIG_H -I. -I./include   -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-all -pthread -DUSE_MALLOC_LOCK=1 -fPIE -Wall -W  -fno-strength-reduce -fno-omit-frame-pointer -Wno-empty-body -Wno-invalid-source-encoding  -DSH_STANDALONE -DSH_IDENT=\&quot;daemon\&quot; -DTRUST_MAIN -DSL_ALWAYS_TRUSTED=0 -o trustfile ./src/trustfile.c
+mkdir /var/lib/samhain
+./samhain-install.sh --destdir= --express --verbose install-data
+  cp samhainrc.linux samhainrc
+  cp samhainrc samhainrc.pre
+  mv -f samhainrc.pre samhainrc.install
+  ./samhain-install.sh --install-sh  -m 600 samhainrc.install /etc/samhainrc
+  checking whether paths are trustworthy
+  configuration file /etc/samhainrc ... OK
+  state directory /run ... OK
+  state directory /var/log ... OK
+  data directory /var/lib/samhain ... OK
+
+  You can use &#39;samhain-install.sh uninstall&#39; for uninstalling
+  i.e. you might consider saving that script for future use
+
+  Use &#39;make install-boot&#39; if you want samhain to start on system boot
+</pre></div>
+</div>
+</section>
+<section id="customisation">
+<h2>Customisation<a class="headerlink" href="#customisation" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-customize.html">Customize</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo vi /etc/samhainrc
+</pre></div>
+</div>
+<p>I will run with defaults for now, and make changes later.</p>
+</section>
+<section id="initialisation">
+<h2>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this heading"></a></h2>
+<p>Initialize the baseline database (<a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-initialize.html">do NOT do twice</a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ samhain -t init
+.
+.
+.
+[snip]
+.
+.
+.
+CRIT   :  [2018-03-04T22:01:33+0100] interface=&lt;lstat&gt;, msg=&lt;No such file or directory&gt;, userid=&lt;0&gt;, path=&lt;/var/lib/urandom/random-seed&gt;
+CRIT   :  [2018-03-04T22:01:33+0100] msg=&lt;POLICY MISSING&gt;, path=&lt;/var/lib/urandom/random-seed&gt;
+MARK   :  [2018-03-04T22:01:33+0100] msg=&lt;File check completed.&gt;, time=&lt;593&gt;, kBps=&lt;9067.752000&gt;
+NOTICE :  [2018-03-04T22:01:33+0100] msg=&lt;Finished writing baseline database.&gt;
+ALERT  :  [2018-03-04T22:01:33+0100] msg=&lt;EXIT&gt;, program=&lt;Samhain&gt;, status=&lt;exit_success&gt;
+</pre></div>
+</div>
+<p>Aaaaand a sheitload of errors and garble passed by on my screen for about ten minutes, including all kinds of critical issues on missing files and policies. This was on a worst-case linux, an archlinux halfway in the making (by me), and to be expected. I be reading them logs then. :D</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.la-samhna.de/samhain/manual/installation-running.html">Run samhain</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ samhain -t check --foreground
+</pre></div>
+</div>
+<p>Immediately. Okay, so more of that garble of course. Just to see what gets reported and logged as differences.</p>
+</section>
+<section id="update-baseline">
+<h2>Update baseline<a class="headerlink" href="#update-baseline" title="Permalink to this heading"></a></h2>
+<p>Note: Archlinux does not have <code class="docutils literal notranslate"><span class="pre">apt</span></code>, and the <code class="docutils literal notranslate"><span class="pre">logs</span></code> are organised differently.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo vi /etc/samhainrc
+</pre></div>
+</div>
+<p>The configuration file is divided into several sections:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Parameter</p></th>
+<th class="text-left head"><p>Note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Attributes</p></td>
+<td class="text-left"><p>files specified in this section are checked only for change in permission and ownership</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>LogFiles</p></td>
+<td class="text-left"><p>files put in this section are not checked for timestamp, size, or cryptographic checksum changes, because they change often</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>GrowingLogFiles</p></td>
+<td class="text-left"><p>files put in this section are not checked for timestamp and cryptographic signature changes and increases in file size (decreases are noted)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>IgnoreAll</p></td>
+<td class="text-left"><p>files in this section are never checked for modifications</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>IgnoreNone</p></td>
+<td class="text-left"><p>these files have all modifications checked, including access time</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ReadOnly</p></td>
+<td class="text-left"><p>all modifications are checked except for access time</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>User0</p></td>
+<td class="text-left"><p>all modifications are checked</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>User1</p></td>
+<td class="text-left"><p>all modifications are checked</p></td>
+</tr>
+</tbody>
+</table>
+<p>Files may be specified in two ways, either as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>file=/path/to/some/file or
+dir=number/path/to/directory
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">number</span></code> is an option defining how many subdirectories to include; up to 99 can be checked. It is not necessary to define the recursion depth. It is also possible to use wildcards, as in <code class="docutils literal notranslate"><span class="pre">file=/etc/*.conf</span></code>. Normal shell wildcards are allowed: “*”, “?”, and “..”.</p>
+<ul class="simple">
+<li><p>Put a fake file (such as “tripwire”) on your filesystem and check for it in the IgnoreNone section. This will alert you if anyone pokes around and accesses that file.</p></li>
+<li><p>Put critical files such as <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> and programs in <code class="docutils literal notranslate"><span class="pre">/usr/sbin</span></code> in the ReadOnly section since they are read often.</p></li>
+<li><p>Put log files in GrowingLogFiles in case an intruder attempts to scrub the logs. If logs are rotated frequently put them under LogFiles.</p></li>
+<li><p>Put samhain, the configuration file, and the database file in IgnoreNone. After samhain is started as a daemon it does not need to re-read configuration file or the database. Any touching of it is very suspicious.</p></li>
+</ul>
+<p>Several hours later, after thoroughly going through <code class="docutils literal notranslate"><span class="pre">samhainrc</span></code>, I got rid of all of the errors and warnings:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo samhain -t update
+[happy emptiness]
+</pre></div>
+</div>
+</section>
+<section id="start-daemon">
+<h2>Start daemon<a class="headerlink" href="#start-daemon" title="Permalink to this heading"></a></h2>
+<p>Start the samhain daemon:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ samhain -t check -D
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Maltrail.html" class="btn btn-neutral float-left" title="Maltrail" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Snort.html" class="btn btn-neutral float-right" title="Snort" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

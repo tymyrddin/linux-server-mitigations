@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal PKI &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Let’s Encrypt" href="Lets-Encrypt.html" />
+    <link rel="prev" title="PKI" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">PKI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/FirewallD.html">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firewall/WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Internal PKI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/pki/Internal-PKI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="internal-pki">
+<h1>Internal PKI<a class="headerlink" href="#internal-pki" title="Permalink to this heading"></a></h1>
+<p>An Internal PKI consists of</p>
+<ul class="simple">
+<li><p>A master-your-own master Certificate Authority (CA) certificate and key which is used to sign each of the server and client certificates.</p></li>
+<li><p>A separate certificate (also known as a public key) and private key for the server and each client.</p></li>
+</ul>
+<p>The most secure way of doing this is have the Certificate Authority keys generated on a stand-alone (not Internet-connected) machine in a secure location.</p>
+<section id="master-certificate-authority-ca">
+<h2>Master Certificate Authority (CA)<a class="headerlink" href="#master-certificate-authority-ca" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/OpenVPN/easy-rsa">easy-rsa</a> is a CLI utility to build and manage a PKI CA. It has a <a class="reference external" href="https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md">quickstart documentation</a> and [openvpn] has example files.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd /etc/openvpn/
+mkdir easy-rsa
+cd easy-rsa
+cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0/* .
+</pre></div>
+</div>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/easy-rsa/vars</span></code> file</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#vi /etc/openvpn/easy-rsa/vars
+</pre></div>
+</div>
+<p>Append content to some of its variables. This will make the next step in the process faster. You can also skip this. The only parameter which must be explicitly entered is the Common Name.</p>
+<p>Now create the Certificate Authority Certificate and Key:
+# source vars
+# ./clean-all
+# ./build-ca</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Generating a 2048 bit RSA private key
+............++++++
+...........++++++
+writing new private key to &#39;ca.key&#39;
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [KG]:
+State or Province Name (full name) [NA]:
+Locality Name (eg, city) [BISHKEK]:
+Organization Name (eg, company) [OpenVPN-TEST]:
+Organizational Unit Name (eg, section) []:
+Common Name (eg, your name or your server&#39;s hostname) []: &lt;hostname&gt;
+Email Address [me@myhost.mydomain]:
+</pre></div>
+</div>
+<p>Hit enter, and again, and again …</p>
+<p>Later more master certificates and keys can be added, and when doing so do NOT use the <code class="docutils literal notranslate"><span class="pre">./clean-all</span></code> instruction again. It wipes the Certificate Authority.</p>
+</section>
+<section id="server-key">
+<h2>Server key<a class="headerlink" href="#server-key" title="Permalink to this heading"></a></h2>
+<p>Generate the server certificate and key with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ./build-key-server &lt;servername&gt;
+</pre></div>
+</div>
+<p>Hit enter, and again, and again … including when it asks you to add a pass phrase. This is between servers. When it asks you if you wish to sign, answers yes, and you also want to commit.</p>
+</section>
+<section id="client-keys">
+<h2>Client keys<a class="headerlink" href="#client-keys" title="Permalink to this heading"></a></h2>
+<p>For security, each client will get its own certificate and key. Per client:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ./build-key &lt;clientname&gt;
+</pre></div>
+</div>
+<p>Hit enter, and again, and again … including when it asks you to add a pass phrase. This is between servers. When it asks you if you wish to sign, answers yes, and you also want to commit.</p>
+</section>
+<section id="diffie-hellman-parameters">
+<h2>Diffie-Hellman parameters<a class="headerlink" href="#diffie-hellman-parameters" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">build-dh</span></code> script to determine the encryption parameters necessary for the server end of a SSL/​TLS connection:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./build-dh
+</pre></div>
+</div>
+<p>And the system will get very busy with prime numbers.</p>
+</section>
+<section id="copy-keys">
+<h2>Copy keys<a class="headerlink" href="#copy-keys" title="Permalink to this heading"></a></h2>
+<p>In the most secure possible way (for instance with <code class="docutils literal notranslate"><span class="pre">scp</span></code>), copy keys and certs to their respective locations.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ca.crt</span></code>, <code class="docutils literal notranslate"><span class="pre">dh2048.pem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;servername&gt;.crt</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;servername&gt;.key</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/openvpn</span></code> on <code class="docutils literal notranslate"><span class="pre">&lt;servername&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ca.crt</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;clientname&gt;.crt</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;clientname&gt;.key</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/openvpn</span></code> on <code class="docutils literal notranslate"><span class="pre">&lt;clientname&gt;</span></code> for each client server.</p></li>
+</ul>
+</section>
+<section id="security-improvement">
+<h2>Security improvement<a class="headerlink" href="#security-improvement" title="Permalink to this heading"></a></h2>
+<p>All keys were created, signed and then distributed to the clients. A more secure way would be to generate the keys in their locations, submit a Certificate Signing Request (CSR) to the key-signing machine or transfer the CSR to the offline CA, the key-signing machine could have processed the request and returned a signed certificate which could have been transferred back to the clients. That way, the secret .key files stay on the machine on which they were generated.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="PKI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Lets-Encrypt.html" class="btn btn-neutral float-right" title="Let’s Encrypt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

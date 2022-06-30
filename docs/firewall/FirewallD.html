@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FirewallD &mdash; Linux server mitigations</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="IPTables" href="IPTables.html" />
+    <link rel="prev" title="FireHOL" href="FireHOL.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Linux server mitigations
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Separation and isolation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../separation/README.html">Separation and isolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Chroot-jails.html">Chroot jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Communication.html">Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/FreeBSD-jails.html">FreeBSD jails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/KVM.html">KVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../separation/Services-audit.html">Services audit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SSH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/README.html">SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Authentication-error.html">Authentication error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ForwardAgent.html">ForwardAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Harden-ssh-server.html">Harden ssh server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Installing-SSH.html">Installing SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Jumping-hosts.html">Jumping hosts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Keeping-current.html">Keeping current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/Key-management.html">Key management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyCommand.html">ProxyCommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ssh/ProxyJump.html">ProxyJump</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPN</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/README.html">VPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/OpenVPN.html">OpenVPN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpn/strongSwan.html">strongSwan</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/README.html">VNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Connection-refused.html">Connection refused</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/Securing-sessions.html">Securing sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TigerVNC.html">TigerVNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc/TightVNC.html">TightVNC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Public key infrastructure (PKI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pki/README.html">PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Internal-PKI.html">Internal PKI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Lets-Encrypt.html">Let’s Encrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/PAM.html">Pluggable Authentication Modules (PAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/Problems.html">Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pki/TLS-SSL.html">TLS/SSL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Logfiles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/README.html">Logfiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Centralised-logging.html">Centralised logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Logrotate.html">Logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/Path-of-a-common-intruder.html">Path of a common intruder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logfiles/rsyslogd.html">Syslog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Backup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../backups/README.html">Backups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backups/Simple-script.html">Simple script</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ids/README.html">HIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Maltrail.html">Maltrail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Samhain.html">Samhain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ids/Snort.html">Snort</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firewall</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Firewalls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Blacklists.html">Blacklists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fail2ban.html">Fail2ban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FireHOL.html">FireHOL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPTables.html">IPTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFTables.html">NFTables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PF.html">Packet filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Port-spoofing.html">Port spoofing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SSHguard.html">SSHguard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UFW.html">UFW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WAF.html">Web Application Firewall WAF</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Healthy SA habits</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../habits/README.html">Healthy habits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Chattr.html">Chattr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Plain-language.html">Plain language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../habits/Puppet.html">Puppet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All mitigations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://tymyrddin.github.io/mitigations/">Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux server mitigations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>FirewallD</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/firewall/FirewallD.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="firewalld">
+<h1>FirewallD<a class="headerlink" href="#firewalld" title="Permalink to this heading"></a></h1>
+<p>FirewallD uses the concepts of zones and services, instead of <a class="reference internal" href="IPTables.html"><span class="doc std std-doc">IPTables</span></a> chain and rules. As of CentOS version 7, FirewallD replaces IPTables as the default firewall management tool.</p>
+<p>FirewallD can be configured and managed using the <code class="docutils literal notranslate"><span class="pre">firewall-cmd</span></code> command line utility.</p>
+<section id="install-and-enable-firewalld">
+<h2>Install and enable FirewallD<a class="headerlink" href="#install-and-enable-firewalld" title="Permalink to this heading"></a></h2>
+<p>If not installed on the system, install with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># yum install firewalld
+</pre></div>
+</div>
+<p>Firewalld is disabled by default. Check status with:
+# firewall-cmd –state</p>
+<p>Start and enable it on boot</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># systemctl start firewalld
+# systemctl enable firewalld
+</pre></div>
+</div>
+</section>
+<section id="zones">
+<h2>Zones<a class="headerlink" href="#zones" title="Permalink to this heading"></a></h2>
+<p>Zones are predefined sets of rules specifying what traffic should be allowed based on the level of trust on the networks a computer is connected to. Network interfaces and sources can be assigned to a zone. From untrusted to trusted:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="left">Zones</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>drop</code></td>
+<td align="left">All incoming connections are dropped without any notification. Only outgoing connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>block</code></td>
+<td align="left">All incoming connections are rejected with an <code>icmp-host-prohibited</code> message for IPv4 and <code>icmp6-adm-prohibited</code> for IPv6n. Only outgoing connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>public</code></td>
+<td align="left">For use in untrusted public areas. Do not trust other computers on the network but allow selected incoming connections.</td>
+</tr>
+<tr>
+<td align="left"><code>external</code></td>
+<td align="left">For use on external networks with NAT masquerading enabled - system acts as a gateway or router. Only selected incoming connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>internal</code></td>
+<td align="left">For use on internal networks - system acts as a gateway or router. Other systems on the network are generally trusted. Only selected incoming connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>dmz</code></td>
+<td align="left">Used for computers in a demilitarized zone, giving limited access to the rest of the network. Only selected incoming connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>work</code></td>
+<td align="left">Used for work machines. Other computers on the network are generally trusted. Only selected incoming connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>home</code></td>
+<td align="left">Used for home machines. Other computers on the network are generally trusted. Only selected incoming connections are allowed.</td>
+</tr>
+<tr>
+<td align="left"><code>trusted</code></td>
+<td align="left">All network connections are accepted. Trust all of the computers in the network.</td>
+</tr>
+</tbody>
+</table>
+<p>The public zone is set as a default zone</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --get-default-zone
+</pre></div>
+</div>
+<p>Check what zones are used by network interface(s)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --get-active-zones
+</pre></div>
+</div>
+<p>Print zone configuration settings</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --zone=public --list-all
+</pre></div>
+</div>
+<p>Configuration of all zones</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --list-all-zones
+</pre></div>
+</div>
+<p>Changing zone of an interface</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --zone=work --change-interface=eth1
+</pre></div>
+</div>
+</section>
+<section id="ports-and-services">
+<h2>Ports and services<a class="headerlink" href="#ports-and-services" title="Permalink to this heading"></a></h2>
+<p>Listing all default available services (<code class="docutils literal notranslate"><span class="pre">/usr/lib/firewalld/services/</span></code> contains xml files with details for each service):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --get-services
+</pre></div>
+</div>
+<p>Allow incoming HTTP traffic (port 80) for interfaces in the public zone, only for the current session (runtime configuration)
+# firewall-cmd –zone=public –add-service=http</p>
+<p>To keep the port open after reboot use the <code class="docutils literal notranslate"><span class="pre">--permanent</span></code> flag
+# firewall-cmd –permanent –zone=public –add-service=http</p>
+<p>Forward traffic from one port to another on the same server
+# firewall-cmd –zone=external –add-forward-port=port=80:proto=tcp:toport=8080</p>
+</section>
+<section id="creating-rulesets">
+<h2>Creating rulesets<a class="headerlink" href="#creating-rulesets" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dmz</span></code> (demilitarized) zone only allows SSH traffic. To change the default zone to <code class="docutils literal notranslate"><span class="pre">dmz</span></code> and to assign it to the <code class="docutils literal notranslate"><span class="pre">eth0</span></code> interface
+# firewall-cmd –set-default-zone=dmz
+# firewall-cmd –zone=dmz –add-interface=eth0</p>
+<p>To open HTTP and HTTPS ports add permanent service rules to the dmz zone
+# firewall-cmd –permanent –zone=dmz –add-service=http
+# firewall-cmd –permanent –zone=dmz –add-service=https</p>
+<p>Start building the firewall!</p>
+</section>
+<section id="usage-examples">
+<h2>Usage examples<a class="headerlink" href="#usage-examples" title="Permalink to this heading"></a></h2>
+<section id="openvpn">
+<h3>OpenVPN<a class="headerlink" href="#openvpn" title="Permalink to this heading"></a></h3>
+<p>When using the default port 1194, enable the openvpn service. Otherwise, create a new service with a different port.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --zone=public --add-service openvpn
+</pre></div>
+</div>
+<p>To add masquerade to the zone:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --zone=server --add-masquerade
+</pre></div>
+</div>
+<p>Make changes permanent:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --runtime-to-permanent
+</pre></div>
+</div>
+</section>
+<section id="smtp">
+<h3>SMTP<a class="headerlink" href="#smtp" title="Permalink to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># firewall-cmd --permanent --add-service=smtp success
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FireHOL.html" class="btn btn-neutral float-left" title="FireHOL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IPTables.html" class="btn btn-neutral float-right" title="IPTables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+        <a href="https://unseen-uni.netlify.app/">Unseen University</a>, 2022
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
